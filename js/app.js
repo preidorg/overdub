@@ -119,10 +119,10 @@ function startRecording() {
 		};
 
 		recorder.setOptions({
-		  timeLimit:playback.duration,  
+		  timeLimit:playback.duration,  // was 120seconds or something like that
 		  encodeAfterRecord:encodeAfterRecord,
 	      ogg: {quality: 0.5},
-	      mp3: {bitRate: 160}
+	      mp3: {bitRate: 128}
 	    });
 
 		//start the recording process
