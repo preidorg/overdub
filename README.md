@@ -10,7 +10,7 @@ To do :
 3. Create a system so that the sound is automatically uploaded to a server.  This could be via php, dropbox, owncloud or something similar.
 4. Make this tool easy to install for the choir / orchestra director.
 
-
+#en français
 Dans le contexte du confinement qui nous touche actuellement à cause du COVID-19 je souhaitais pouvoir réaliser un orchestre ou choeur virtuel.  Les techniques employées par les choeurs comme celui de Eric Whitacre nécessite de débrancher son micro, démarrer une vidéo guide-chant, de faire entendre le bip sonore dans le micro, de remettre son casque et ensuite de chanter.   Je cherchais donc une application simple permettant aux musiciens de s'enregistrer en écoutant simultanément une piste guide pour éviter des problèmes de synchronisation et de devoir faire de longues expications.  N'ayant pas trouvé un tel application, je me suis lancé avec mes peu de connaissances en programmation dans le développement d'overdub. L'outil qui n'est pas encore à point mais la fonctionalité de base est présente.   
 
 Ce qu'il reste à faire :
