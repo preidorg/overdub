@@ -13,7 +13,7 @@ To do :
 3. Create a system so that the sound is automatically uploaded to a server.  This could be via php, dropbox, owncloud or something similar.
 4. Make this tool easy to install for the choir / orchestra director.
 
-Try here: [https://preidorg.github.io/overdub/](https://preidorg.github.io/overdub/)
+Try here: Démo ici: [https://preidorg.github.io/overdub/?playback=https://preidorg.github.io/overdub/son/sound1.mp3](https://preidorg.github.io/overdub/?playback=https://preidorg.github.io/overdub/son/sound1.mp3)
 
 # en français
 Dans le contexte du confinement qui nous touche actuellement à cause du COVID-19 je souhaitais pouvoir réaliser un orchestre ou choeur virtuel.  Les techniques employées par les choeurs comme celui de Eric Whitacre nécessite de débrancher son micro, démarrer une vidéo guide-chant, de faire entendre le bip sonore dans le micro, de remettre son casque et ensuite de chanter.   Je cherchais donc une application simple permettant aux musiciens de s'enregistrer en écoutant simultanément une piste guide pour éviter des problèmes de synchronisation ou de devoir faire de longues explications pour utiliser des outils d'enregistrement.  N'ayant pas trouvé une telle application, je me suis lancé avec mes connaissances limitées en programmation dans le développement d'overdub. L'outil qui n'est pas encore au point, mais la fonctionnalité de base est présente.   
@@ -27,7 +27,6 @@ Ce qu'il reste à faire :
 3. Faire en sorte que le son puisse être envoyé directement au serveur/dropbox/owncloud sans que l'utilisateur soit obligé de le télécharger avant.
 4. Rendre l'outil facile à installer sur un serveur.  
 
-Démo ici: [https://preidorg.github.io/overdub/](https://preidorg.github.io/overdub/)
-
+Démo ici: [https://preidorg.github.io/overdub/?playback=https://preidorg.github.io/overdub/son/sound1.mp3](https://preidorg.github.io/overdub/?playback=https://preidorg.github.io/overdub/son/sound1.mp3)
 
 
