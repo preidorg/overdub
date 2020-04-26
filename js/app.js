@@ -62,7 +62,9 @@ function startRecording() {
 		https://addpipe.com/blog/audio-constraints-getusermedia/
 	*/
     
-    var constraints = { audio: true, video:false }
+    var constraints = { audio: true, 
+        echoCancellation: false, 
+        video:false };
 
     /*
     	We're using the standard promise based getUserMedia() 
@@ -119,10 +121,10 @@ function startRecording() {
 		};
 
 		recorder.setOptions({
-		  timeLimit:playback.duration,  
+		  timeLimit:playback.duration,  // was 120seconds or something like that
 		  encodeAfterRecord:encodeAfterRecord,
 	      ogg: {quality: 0.5},
-	      mp3: {bitRate: 160}
+	      mp3: {bitRate: 128}
 	    });
 
 		//start the recording process
