@@ -164,7 +164,7 @@ function stopRecording() {
 	
 	//tell the recorder to finish the recording (stop recording + encode the recorded audio)
 	recorder.finishRecording();
-	__log('Recording stopped');
+	__log('Recording stopped - please wait...');
 }
 
 function createDownloadLink(blob,encoding) {
