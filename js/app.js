@@ -18,7 +18,10 @@ var recordButton = document.getElementById("recordButton");
 var stopButton = document.getElementById("stopButton");
 var playButton = document.getElementById("playButton");
 
-var playback = new Audio('son/sound1.mp3');
+var params = new URLSearchParams(location.search);
+var playbackURL = params.get('playback')
+var playback = new Audio(playbackURL);
+//var playback = new Audio('son/sound1.mp3');
 
 
 //add events to those 3 buttons
@@ -27,7 +30,7 @@ stopButton.addEventListener("click", stopRecording);
 playButton.addEventListener("click", startPlayback);
 
 function startPlayback() {
-	console.log("startPlayback() called");
+	console.log("startPlayback() called - ", playbackURL);
         // temporarily change the function of the stop button from stopRecording to stop Playback.  We'll remember to change it back!
         stopButton.removeEventListener("click", stopRecording);
         stopButton.addEventListener("click", stopPlayback);
