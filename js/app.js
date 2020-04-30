@@ -19,7 +19,12 @@ var stopButton = document.getElementById("stopButton");
 var playButton = document.getElementById("playButton");
 
 var params = new URLSearchParams(location.search);
-var playbackURL = params.get('playback')
+var playbackURL = params.get('playback');
+//alert(playbackURL);
+var playbackFileNameSansExtension = playbackURL.replace(/^.*[\\\/]|\.[^/.]+$/g, '');
+//alert(fileName);
+
+//alert(playbackURL.split('/').pop());
 var playback = new Audio(playbackURL);
 //var playback = new Audio('son/sound1.mp3');
 
@@ -180,7 +185,7 @@ function createDownloadLink(blob,encoding) {
 
 	//link the a element to the blob
 	link.href = url;
-	link.download = new Date().toISOString() + '.'+encoding;
+	link.download = playbackFileNameSansExtension + '_' + new Date().toISOString() + '.'+encoding;
 	link.innerHTML = link.download;
 
 	//add the new audio and a elements to the li element
