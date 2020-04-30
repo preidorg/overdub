@@ -20,13 +20,39 @@ var playButton = document.getElementById("playButton");
 
 var params = new URLSearchParams(location.search);
 var playbackURL = params.get('playback');
-//alert(playbackURL);
-var playbackFileNameSansExtension = playbackURL.replace(/^.*[\\\/]|\.[^/.]+$/g, '');
-//alert(fileName);
 
-//alert(playbackURL.split('/').pop());
-var playback = new Audio(playbackURL);
-//var playback = new Audio('son/sound1.mp3');
+if(params.get('playback')===null){
+    console.log("Backing track URL not found: ", playbackURL);
+    document.getElementById("controls").style.display = 'none';  // Hide controls
+    askForPlaybackURL();
+}
+else {
+    console.log("Backing track URL found: ", playbackURL);
+    document.getElementById("inputPlaybackURL").style.display = 'none';  // Hide URL input box
+    var playbackFileNameSansExtension = playbackURL.replace(/^.*[\\\/]|\.[^/.]+$/g, '');
+    var playback = new Audio(playbackURL);
+}
+
+
+document.getElementById("JSwarning").style.display = 'none';  // Hide javascript warning
+document.getElementById("overdubURLdisplay").style.display = 'none';  // Hide User URL display
+document.getElementById("encodingTypeSelectDiv").style.display = 'none';  // Hide encoding options
+
+function askForPlaybackURL(){
+    console.log("ask for URL");
+    document.getElementById("overdubURL").style.display = 'block';  // Reveal URL input box and accompanying instructions
+}
+
+function getUserPlaybackURL(){
+    console.log("get URL");
+    document.getElementById("overdubURLdisplay").style.display = 'block';  // Reveal URL
+    var userPlaybackURL = document.getElementById('userPlaybackURL').value;
+    document.getElementById("overdubURL").innerHTML= window.location.href + "?playback=" + userPlaybackURL;
+    document.getElementById("overdubURL").href= window.location.href + "?playback=" + userPlaybackURL;
+     
+     window.location.href
+//   innerHTML="Format: 2 channel "+encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value+" @ "+audioContext.sampleRate/1000+"kHz";
+}
 
 
 //add events to those 3 buttons
@@ -141,7 +167,7 @@ function startRecording() {
 		 __log("Recording started");
                  
                 playback.play();   
-		 __log("Playback started");
+//		 __log("Playback started");
 
 	}).catch(function(err) {
 	  	//enable the record button if getUSerMedia() fails

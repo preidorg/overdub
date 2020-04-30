@@ -12,18 +12,37 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <h1>Ovrdub</h1>
 <!--	<h1>Audio Recording Demo With WebAudioRecorder.js</h1>
 	<p><small>Made by the <a href="https://addpipe.com" target="_blank">Pipe Video Recording Platform</a></small></p>
 	<p>This demo shows you how to use <a href="https://github.com/higuma/web-audio-recorder-js" target="_blank">WebAudioRecorder.js</a> - a JavaScript library written in 2015 by higuma - to record audio and encode to common formats (pcm, Vorbis, mp3) directly in the browser.</p>
 	<p>Check out the <a href="https://github.com/addpipe/simple-web-audio-recorder-demo" target="_blank">code on GitHub</a> and our <a href="https://addpipe.com/blog/using-webaudiorecorder-js-to-record-audio-on-your-website/" target="_blank">blog post on using WebAudioRecorder.js to Record MP3, Vorbis and WAV Audio</a>.</p>
 -->
 	<div style="max-width: 28em;">
-		<p>Convert recorded audio to:</p>
+            <p id="JSwarning">This site requires javascript to operate.  Please activate javascript.</p>
+            <div id="inputPlaybackURL">
+                <p>No backing track URL found.  Please enter the URL of a direct link to a sound file below and overdub will generate a link. You can also try the <a href="./?playback=son/sound1.mp3">demo page</a>.</p>
+                <p>Aucun URL playback trouvé.  Veuillez copiercoller  l'URL complet d'un lien direct vers un fichier audio ci-dessous et Overdub générera un URL Overdub. Sinon, vous pouvez essayer la <a href="son/sound1.mp3">page de démonstration</a>.</p>
+<!--                <form>-->
+                    <label for="userPlaybackURL">URL : </label>
+                    <input type="url" id="userPlaybackURL" name="userPlaybackURL" oninput="getUserPlaybackURL()">
+<!--                </form> -->
+            </div>
+
+            <div id=overdubURLdisplay>
+                <p>Overdub link: <a id="overdubURL"></a></p>
+                <p>Use this link to integrate load your sound into Overdub.  Copy the link the share with your musicians so that they can record over.</p>
+                <p>Servez-vous de ce lien pour intégrer votre son dans Overdub.  Copier le lien et partagez-le avec vos musiciens pourqu'ils s'enregistrent avec.
+            </div>
+            <div id='encodingTypeSelectDiv'>
+                <p>Convert recorded audio to:</p>
 		<select id="encodingTypeSelect">
 		  <option value="wav">Waveform Audio (.wav)</option>
 		  <option value="mp3" selected="selected">MP3 (MPEG-1 Audio Layer III) (.mp3)</option>
 		  <option value="ogg">Ogg Vorbis (.ogg)</option>
 		</select>
+            </div>
+           
 		<div id="controls">
 			<button id="playButton">Play</button>
 			<button id="recordButton">Record</button>
