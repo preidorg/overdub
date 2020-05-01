@@ -42,7 +42,9 @@
 		  <option value="ogg">Ogg Vorbis (.ogg)</option>
 		</select>
             </div>
-           
+            
+            <div id="mainInterface">
+                    <p style="display:block">Backing track: <a id="displayPlaybackURL" target="_blank"></a></p>           
 		<div id="controls">
 			<button id="playButton">Play</button>
 			<button id="recordButton">Record</button>
@@ -54,6 +56,7 @@
 
 		<pre>Recordings</pre>
 		<ol id="recordingsList"></ol>
+            </div>
 	</div>
 
 	<!-- inserting these scripts at the end to be able to use all the elements in the DOM -->

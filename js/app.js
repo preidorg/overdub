@@ -23,7 +23,7 @@ var playbackURL = params.get('playback');
 
 if(params.get('playback')===null){
     console.log("Backing track URL not found: ", playbackURL);
-    document.getElementById("controls").style.display = 'none';  // Hide controls
+    document.getElementById("mainInterface").style.display = 'none';  // Hide controls
     askForPlaybackURL();
 }
 else {
@@ -31,6 +31,8 @@ else {
     document.getElementById("inputPlaybackURL").style.display = 'none';  // Hide URL input box
     var playbackFileNameSansExtension = playbackURL.replace(/^.*[\\\/]|\.[^/.]+$/g, '');
     var playback = new Audio(playbackURL);
+    document.getElementById("displayPlaybackURL").innerHTML= playbackURL.replace(/^.*[\\\/]/, '');
+    document.getElementById("displayPlaybackURL").href= playbackURL;
 }
 
 
