@@ -19,10 +19,13 @@
 	<p>Check out the <a href="https://github.com/addpipe/simple-web-audio-recorder-demo" target="_blank">code on GitHub</a> and our <a href="https://addpipe.com/blog/using-webaudiorecorder-js-to-record-audio-on-your-website/" target="_blank">blog post on using WebAudioRecorder.js to Record MP3, Vorbis and WAV Audio</a>.</p>
 -->
 	<div style="max-width: 28em;">
-            <p id="JSwarning">This site requires javascript to operate.  Please activate javascript.</p>
+            <div id="JSwarning">
+                <p><strong>This site requires javascript to operate.  Please activate javascript.</strong></p>
+                <p><strong>Merci de bien vouloir activer javascript</strong></p>
+            </div>
             <div id="inputPlaybackURL">
                 <p>No backing track URL found.  Please enter the URL of a direct link to a sound file below and overdub will generate a link. You can also try the <a href="./?playback=son/sound1.mp3">demo page</a>.</p>
-                <p>Aucun URL playback trouvé.  Veuillez copiercoller  l'URL complet d'un lien direct vers un fichier audio ci-dessous et Overdub générera un URL Overdub. Sinon, vous pouvez essayer la <a href="./?playback=son/sound1.mp3">page de démonstration</a>.</p>
+                <p>Aucun URL playback trouvé.  Veuillez copier-coller l'URL complet d'un lien direct vers un fichier audio ci-dessous et Overdub générera un URL Overdub. Sinon, vous pouvez essayer la <a href="./?playback=son/sound1.mp3">page de démonstration</a>.</p>
 <!--                <form>-->
                     <label for="userPlaybackURL">URL : </label>
                     <input type="url" id="userPlaybackURL" name="userPlaybackURL" oninput="getUserPlaybackURL()">
@@ -44,7 +47,11 @@
             </div>
             
             <div id="mainInterface">
-                    <p style="display:block">Backing track: <a id="displayPlaybackURL" target="_blank"></a></p>           
+                    <p style="display:block">Backing track: <a id="displayPlaybackURL" target="_blank"></a></p>
+                    <label for="usersName">Your name:</label>
+                    <input type="text" id="usersName" name="usersName" placeholder="Prénom"> <br>
+                    <label for="usersClass">Class: </label>
+                    <input type="text" id="usersClass" name="usersClass" style="width:4em" placeholder="6A"> (optional)
 		<div id="controls">
 			<button id="playButton">Play</button>
 			<button id="recordButton">Record</button>
