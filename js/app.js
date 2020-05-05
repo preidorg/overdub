@@ -108,7 +108,8 @@ function startRecording() {
 	*/
 
 	navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-		__log("getUserMedia() success, stream created, initializing WebAudioRecorder...");
+            __logClear();
+            __log("getUserMedia() success, stream created, initializing WebAudioRecorder...");
 
 		/*
 			create an audio context after getUserMedia is called
@@ -234,4 +235,7 @@ function createDownloadLink(blob,encoding) {
 //helper function
 function __log(e, data) {
 	log.innerHTML += "\n" + e + " " + (data || '');
+}
+function __logClear() {
+    log.innerHTML = ''
 }
