@@ -214,7 +214,11 @@ function createDownloadLink(blob,encoding) {
 	//link the a element to the blob
 	link.href = url;
         var usersName = document.getElementById('usersName').value;
-	link.download = playbackFileNameSansExtension + '_' + usersName + '_' + new Date().toISOString() + '.'+encoding;
+        let usersClass = document.getElementById('usersClass').value;
+        if (usersClass !=''){
+            usersClass += '_';
+        }
+	link.download = playbackFileNameSansExtension + '_' + usersClass + usersName + '_' + new Date().toISOString() + '.'+encoding;
 	link.innerHTML = link.download;
 
 	//add the new audio and a elements to the li element
