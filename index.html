@@ -10,6 +10,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" id="langstyle">
+
 </head>
 <body>
     <h1>Ovrdub</h1>
@@ -20,22 +22,26 @@
 -->
 	<div style="max-width: 28em;">
             <div id="JSwarning">
-                <p><strong>This site requires javascript to operate.  Please activate javascript.</strong></p>
-                <p><strong>Merci de bien vouloir activer javascript</strong></p>
+                <p lang="en"><strong>This site requires javascript to operate.  Please activate javascript.</strong></p>
+
+                <p lang="fr"><strong>Merci de bien vouloir activer javascript</strong></p>
             </div>
             <div id="inputPlaybackURL">
-                <p>No backing track URL found.  Please enter the URL of a direct link to a sound file below and overdub will generate a link. You can also try the <a href="./?playback=son/sound1.mp3">demo page</a>.</p>
-                <p>Aucun URL playback trouvé.  Veuillez copier-coller l'URL complet d'un lien direct vers un fichier audio ci-dessous et Overdub générera un URL Overdub. Sinon, vous pouvez essayer la <a href="./?playback=son/sound1.mp3">page de démonstration</a>.</p>
+                <p lang="en">No backing track URL found.  Please enter the URL of a direct link to a sound file below and overdub will generate a link. You can also try the <a href="./?playback=son/sound1.mp3">demo page</a>.</p>
+                <p lang="fr">Aucun URL playback trouvé.  Veuillez copier-coller l'URL complet d'un lien direct vers un fichier audio ci-dessous et Overdub générera un URL Overdub. Sinon, vous pouvez essayer la <a href="./?playback=son/sound1.mp3">page de démonstration</a>.</p>
 <!--                <form>-->
                     <label for="userPlaybackURL">URL : </label>
-                    <input type="url" id="userPlaybackURL" name="userPlaybackURL" oninput="getUserPlaybackURL()">
+                    <input type="url" id="userPlaybackURL" name="userPlaybackURL" oninput="getUserPlaybackURL()" placeholder="https://example.com/sound.mp3" style="width : 20em">
 <!--                </form> -->
             </div>
 
             <div id=overdubURLdisplay>
-                <p>Overdub link: <a id="overdubURL"></a></p>
-                <p>Use this link to integrate your sound into Overdub.  Copy the link the share with your musicians so that they can record over.</p>
-                <p>Servez-vous de ce lien pour intégrer votre son dans Overdub.  Copier le lien et partagez-le avec vos musiciens pourqu'ils s'enregistrent avec.
+                <p>
+                    <span lang="en">Overdub link: </span>
+                    <span lang="fr">Lien Overdub :</span>
+                    <a id="overdubURL"></a></p>
+                <p lang="en">Use this link to integrate your sound into Overdub.  Copy the link the share with your musicians so that they can record over it.</p>
+                <p lang="fr">Servez-vous de ce lien pour intégrer votre son dans Overdub.  Copiez le lien et partagez-le avec vos musiciens pourqu'ils s'enregistrent avec.
             </div>
             <div id='encodingTypeSelectDiv'>
                 <p>Convert recorded audio to:</p>
@@ -47,11 +53,59 @@
             </div>
             
             <div id="mainInterface">
-                    <p style="display:block">Backing track: <a id="displayPlaybackURL" target="_blank"></a></p>
-                    <label for="usersName">Your name:</label>
-                    <input type="text" id="usersName" name="usersName" placeholder="Prénom"> <br>
-                    <label for="usersClass">Class: </label>
-                    <input type="text" id="usersClass" name="usersClass" style="width:4em" placeholder="6A"> (optional)
+                <a onclick="toggle_show_help()" lang="en">Help</a>
+                <a onclick="toggle_show_help()" lang="fr">Aide</a>
+                <div id="od_help" style="display : none">
+                    <div lang="en">
+                        <p>Welcome to Ovrdub a tool to help you record over a backing/guide track.  Please wear headphones so that the backing/guide track can't be heard on the recording.</p>
+                        <p>When you press play, you will hear the backing track and you can practice singing or playing along with it.
+                        When you are ready to record, write your name in the input field and it will be added to the filename, then press record. 
+                        <em>You must allow this page to use your microphone so that it can record you.</em></p>
+                        <p>When you have finished recording press stop and wait for ovrdub to convert your recording to mp3.  
+                        You will then be able to listen to your recording.
+                        You can repeat this as many times as you like.</p>
+                        <p>When you are satisfied with your recording you can right click on the download link to save it to your device.
+                        You can then send this file to your teacher/conductor/director/collaborator.
+                        <em>Warning: if you close this window, any unsaved recordings will be lost.</em></p>
+                    </div>
+                    <div lang="fr">
+                        <p>
+                        Bienvenue sur Ovrdub, un outil pour s'enregistrer avec une piste d'accompagnement (playback) dans les oreilles. 
+                        Merci de porter un casque ou des écouteurs pour que la piste d'accompagnement ne s'entende pas sur l'enregistrement.
+                        </p>
+                        <p>
+                        Appuyez sur play pour entendre le playback et s'entrainer.
+                        Quand vous êtes prêt.e à enregistrer, écrivez votre nom dans la case prévue pour qu'il soit ajouté au nom du fichier enregistré. 
+                        Cliquez sur "record", puis <em>autorisez votre navigateur à accéder au micro, sinon Ovrdub ne pourra pas vous enregistrer</em>.  
+                        </p>
+                        <p>
+                        Quand vous avez fini d'enregistrer, cliquez sur stop, puis attendez que Ovrdub finisse de convertir votre enregistrement. Vous pourriez ensuite écouter ce que vous avez enregistré.
+                        Vous pouvez faire recommencer l'enregistrement autant de fois que vous voulez.  
+                        </p>
+                        <p>
+                        Quand vous êtes satisfait d'un enregistrement, vous pouvez le télécharger grâce au lien et l'envoyer à votre chef/professeur/collaborateur.
+                        <em>Attention : si vous fermez cette page avant de sauvegarder vos enregistrements, ils seront perdus.</em>
+                        </p>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <p style="display:block">
+                    <span lang="en">Backing track: </span>
+                    <span lang="fr">Fichier playback : </span>
+                        
+                    <a id="displayPlaybackURL" target="_blank"></a>
+                </p>
+                    <label for="usersName" lang="en">Your name:</label>
+                    <label for="usersName" lang="fr">Prénom :</label>
+                    <input type="text" id="usersName" name="usersName"> 
+                    <br>
+                    <label for="usersClass" lang="en">Class: </label>
+                    <label for="usersClass" lang="fr">Classe : </label>
+                    <input type="text" id="usersClass" name="usersClass" style="width:4em" placeholder="6A"> 
+                    <span lang="en">(optional)</span>
+                    <span lang="fr">(non obligatoire)</span>
 		<div id="controls">
 			<button id="playButton">Play</button>
 			<button id="recordButton">Record</button>

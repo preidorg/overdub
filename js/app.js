@@ -36,9 +36,39 @@ else {
 }
 
 
+checkLanguage();
+
 document.getElementById("JSwarning").style.display = 'none';  // Hide javascript warning
 document.getElementById("overdubURLdisplay").style.display = 'none';  // Hide User URL display
 document.getElementById("encodingTypeSelectDiv").style.display = 'none';  // Hide encoding options
+
+
+
+function checkLanguage(){
+    var known = { en: true, fr: true};
+    var lang  = ((navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage || 'en').substr(0, 2);
+    if(!known[lang])
+        lang = 'en';
+    console.log("Language: ", lang);
+
+    document.getElementById("langstyle").href="style_" + lang + ".css";
+}
+
+
+function toggle_show_help() {
+    switch (document.getElementById("od_help").style.display) {
+        case "block":
+            document.getElementById("od_help").style.display = 'none';
+            break
+        case "none":
+            document.getElementById("od_help").style.display = 'block';
+            // 
+            break
+                
+                
+    }
+ //   document.getElementById("od_help").style.display = 'block';  // 
+}
 
 function askForPlaybackURL(){
     console.log("ask for URL");
