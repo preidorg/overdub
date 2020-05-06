@@ -37,7 +37,6 @@ else {
 
 
 checkLanguage();
-//alert('helloafter');
 
 document.getElementById("JSwarning").style.display = 'none';  // Hide javascript warning
 document.getElementById("overdubURLdisplay").style.display = 'none';  // Hide User URL display
@@ -46,27 +45,13 @@ document.getElementById("encodingTypeSelectDiv").style.display = 'none';  // Hid
 
 
 function checkLanguage(){
-//        alert('hello');
-
     var known = { en: true, fr: true};
     var lang  = ((navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage || 'en').substr(0, 2);
     if(!known[lang])
         lang = 'en';
     console.log("Language: ", lang);
- //   var langstyle = 
- //   if (lang='fr'){
- //   document.getElementById("langstyle").href="style_fr.css";
- //   }
+
     document.getElementById("langstyle").href="style_" + lang + ".css";
-    
-    //var userLang = navigator.language || navigator.userLanguage; 
-    // Find all <div>s with a class of "wrapper" and lang attribute equal to `lang`
-    // and make them visibile.
-    //document.getElementsByCl("en").style.display = 'none';
-  //$('div.wrapper[lang='  + lang + ']').show();
-    // Find all <div>s with a class of "wrapper" and lang attribute not equal
-    // to `lang` and make them invisibile.
-  //$('div.wrapper[lang!=' + lang + ']').hide();
 }
 
 function askForPlaybackURL(){

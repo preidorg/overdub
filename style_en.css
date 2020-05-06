@@ -9,9 +9,9 @@ and open the template in the editor.
 */
 
 :lang(en) { 
-  background: yellow;
+  display: block;
 }
 
 :lang(fr) {
-    background: green;
+  display: none;
 }
