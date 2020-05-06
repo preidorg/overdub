@@ -54,6 +54,22 @@ function checkLanguage(){
     document.getElementById("langstyle").href="style_" + lang + ".css";
 }
 
+
+function toggle_show_help() {
+    switch (document.getElementById("od_help").style.display) {
+        case "block":
+            document.getElementById("od_help").style.display = 'none';
+            break
+        case "none":
+            document.getElementById("od_help").style.display = 'block';
+            // 
+            break
+                
+                
+    }
+ //   document.getElementById("od_help").style.display = 'block';  // 
+}
+
 function askForPlaybackURL(){
     console.log("ask for URL");
     document.getElementById("overdubURL").style.display = 'block';  // Reveal URL input box and accompanying instructions
