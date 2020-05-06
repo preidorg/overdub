@@ -8,9 +8,9 @@ and open the template in the editor.
     Author     : reid
 */
 
-:lang(en) { 
+/*:lang(en) { 
   display: block;
-}
+}*/
 
 :lang(fr) {
   display: none;
