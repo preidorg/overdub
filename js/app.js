@@ -33,25 +33,23 @@ var playbackURL = params.get('playback');
 var playback = new Audio(playbackURL);
 
 // ... and help the user configure ovrdub if there isn't a backing track URL
-checkPlaybackURL();
 
-function checkPlaybackURL(){
-    if (playbackURL === null) {          // If no backing track found in the URL...
-        console.log("Backing track URL not found.");
-        document.getElementById(
-                "mainInterface").style.display = 'none';  // Hide controls
-        askForPlaybackURL();    // Run the code to help the user ask for a URL
-    } else {
-        console.log("Backing track URL found: ", playbackURL);
-        document.getElementById("inputPlaybackURL").style.display = 'none';  // Hide URL input interface
-        var playbackFileNameSansExtension = playbackURL.replace(
-                /^.*[\\\/]|\.[^/.]+$/g, '');
-        var playback = new Audio(playbackURL);
-        document.getElementById(
-                "displayPlaybackURL").innerHTML = playbackURL.replace(
-                /^.*[\\\/]/, '');
-        document.getElementById("displayPlaybackURL").href = playbackURL;
-    }
+if (playbackURL === null) {          // If no backing track found in the URL...
+    console.log("Backing track URL not found.");
+    document.getElementById(
+            "mainInterface").style.display = 'none';  // Hide controls
+    askForPlaybackURL();    // Run the code to help the user ask for a URL
+} else {
+    console.log("Backing track URL found: ", playbackURL);
+    document.getElementById(
+            "inputPlaybackURL").style.display = 'none';  // Hide URL input interface
+    var playbackFileNameSansExtension = playbackURL.replace(
+            /^.*[\\\/]|\.[^/.]+$/g, '');
+    var playback = new Audio(playbackURL);
+    document.getElementById(
+            "displayPlaybackURL").innerHTML = playbackURL.replace(
+            /^.*[\\\/]/, '');
+    document.getElementById("displayPlaybackURL").href = playbackURL;
 }
 
 
