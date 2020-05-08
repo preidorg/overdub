@@ -11,7 +11,7 @@
 
 	<link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" type="text/css" id="langstyle">
-
+        <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
 </head>
 <body>
     <h1>Ovrdub</h1>
@@ -26,16 +26,14 @@
 
                 <p lang="fr"><strong>Merci de bien vouloir activer javascript</strong></p>
             </div>
-            <div id="inputPlaybackURL">
+            <div id="inputPlaybackURL" style="display:none">
                 <p lang="en">No backing track URL found.  Please enter the URL of a direct link to a sound file below and overdub will generate a link. You can also try the <a href="./?playback=son/sound1.mp3">demo page</a>.</p>
                 <p lang="fr">Aucun URL playback trouvé.  Veuillez copier-coller l'URL complet d'un lien direct vers un fichier audio ci-dessous et Overdub générera un URL Overdub. Sinon, vous pouvez essayer la <a href="./?playback=son/sound1.mp3">page de démonstration</a>.</p>
-<!--                <form>-->
                     <label for="userPlaybackURL">URL : </label>
                     <input type="url" id="userPlaybackURL" name="userPlaybackURL" oninput="getUserPlaybackURL()" placeholder="https://example.com/sound.mp3" style="width : 20em">
-<!--                </form> -->
             </div>
 
-            <div id=overdubURLdisplay>
+            <div id=overdubURLdisplay style="display:none">
                 <p>
                     <span lang="en">Overdub link: </span>
                     <span lang="fr">Lien Overdub :</span>
@@ -43,7 +41,7 @@
                 <p lang="en">Use this link to integrate your sound into Overdub.  Copy the link the share with your musicians so that they can record over it.</p>
                 <p lang="fr">Servez-vous de ce lien pour intégrer votre son dans Overdub.  Copiez le lien et partagez-le avec vos musiciens pourqu'ils s'enregistrent avec.
             </div>
-            <div id='encodingTypeSelectDiv'>
+            <div id='encodingTypeSelectDiv' style="display:none">
                 <p>Convert recorded audio to:</p>
 		<select id="encodingTypeSelect">
 		  <option value="wav">Waveform Audio (.wav)</option>
@@ -63,7 +61,7 @@
                         <em>You must allow this page to use your microphone so that it can record you.</em></p>
                         <p>When you have finished recording press stop and wait for ovrdub to convert your recording to mp3.  
                         You will then be able to listen to your recording.
-                        You can repeat this as many times as you like.</p>
+                        You can repeat the recording process as many times as you like.</p>
                         <p>When you are satisfied with your recording you can right click on the download link to save it to your device.
                         You can then send this file to your teacher/conductor/director/collaborator.
                         <em>Warning: if you close this window, any unsaved recordings will be lost.</em></p>
