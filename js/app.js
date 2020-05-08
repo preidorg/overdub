@@ -4,6 +4,7 @@
 URL = window.URL || window.webkitURL;
 
 checkLanguage();
+HideUIElementsInit();
 
 var gumStream; 			//stream from getUserMedia()
 var recorder; 			//WebAudioRecorder object
@@ -15,15 +16,23 @@ var encodeAfterRecord = true;   // when to encode
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext; //new audio context to help us record
 
+// Configure UI elements
 var encodingTypeSelect = document.getElementById("encodingTypeSelect");
 var recordButton = document.getElementById("recordButton");
 var stopButton = document.getElementById("stopButton");
 var playButton = document.getElementById("playButton");
 
+//add events to those 3 buttons
+recordButton.addEventListener("click", startRecording);
+stopButton.addEventListener("click", stopRecording);
+playButton.addEventListener("click", startPlayback);
+
+// get the URL for the backing track...
 var params = new URLSearchParams(location.search);
 var playbackURL = params.get('playback');
 var playback = new Audio(playbackURL);
 
+// ... and help the user configure ovrdub if there isn't a backing track URL
 checkPlaybackURL();
 
 function checkPlaybackURL(){
@@ -46,10 +55,14 @@ function checkPlaybackURL(){
 }
 
 
-document.getElementById("JSwarning").style.display = 'none';  // Hide javascript warning
-document.getElementById("overdubURLdisplay").style.display = 'none';  // Hide User URL display
-document.getElementById("encodingTypeSelectDiv").style.display = 'none';  // Hide encoding options
-
+function HideUIElementsInit() {
+    document.getElementById(
+            "JSwarning").style.display = 'none';  // Hide javascript warning
+    document.getElementById(
+            "overdubURLdisplay").style.display = 'none';  // Hide User URL display
+    document.getElementById(
+            "encodingTypeSelectDiv").style.display = 'none';  // Hide encoding options
+}
 
 
 function checkLanguage(){
@@ -95,10 +108,7 @@ function getUserPlaybackURL(){
 }
 
 
-//add events to those 3 buttons
-recordButton.addEventListener("click", startRecording);
-stopButton.addEventListener("click", stopRecording);
-playButton.addEventListener("click", startPlayback);
+
 
 function startPlayback() {
 	console.log("startPlayback() called - ", playbackURL);
