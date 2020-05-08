@@ -22,21 +22,28 @@ var playButton = document.getElementById("playButton");
 
 var params = new URLSearchParams(location.search);
 var playbackURL = params.get('playback');
+var playback = new Audio(playbackURL);
 
-if(params.get('playback')===null){
-    console.log("Backing track URL not found: ", playbackURL);
-    document.getElementById("mainInterface").style.display = 'none';  // Hide controls
-    askForPlaybackURL();
-}
-else {
-    console.log("Backing track URL found: ", playbackURL);
-    document.getElementById("inputPlaybackURL").style.display = 'none';  // Hide URL input box
-    var playbackFileNameSansExtension = playbackURL.replace(/^.*[\\\/]|\.[^/.]+$/g, '');
-    var playback = new Audio(playbackURL);
-    document.getElementById("displayPlaybackURL").innerHTML= playbackURL.replace(/^.*[\\\/]/, '');
-    document.getElementById("displayPlaybackURL").href= playbackURL;
-}
+checkPlaybackURL();
 
+function checkPlaybackURL(){
+    if (playbackURL === null) {          // If no backing track found in the URL...
+        console.log("Backing track URL not found.");
+        document.getElementById(
+                "mainInterface").style.display = 'none';  // Hide controls
+        askForPlaybackURL();    // Run the code to help the user ask for a URL
+    } else {
+        console.log("Backing track URL found: ", playbackURL);
+        document.getElementById("inputPlaybackURL").style.display = 'none';  // Hide URL input interface
+        var playbackFileNameSansExtension = playbackURL.replace(
+                /^.*[\\\/]|\.[^/.]+$/g, '');
+        var playback = new Audio(playbackURL);
+        document.getElementById(
+                "displayPlaybackURL").innerHTML = playbackURL.replace(
+                /^.*[\\\/]/, '');
+        document.getElementById("displayPlaybackURL").href = playbackURL;
+    }
+}
 
 
 document.getElementById("JSwarning").style.display = 'none';  // Hide javascript warning
