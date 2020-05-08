@@ -3,11 +3,13 @@
 //webkitURL is deprecated but nevertheless
 URL = window.URL || window.webkitURL;
 
-var gumStream; 						//stream from getUserMedia()
-var recorder; 						//WebAudioRecorder object
-var input; 						//MediaStreamAudioSourceNode  we'll be recording
-var encodingType; 					//holds selected encoding for resulting audio (file)
-var encodeAfterRecord = true;       // when to encode
+checkLanguage();
+
+var gumStream; 			//stream from getUserMedia()
+var recorder; 			//WebAudioRecorder object
+var input; 			//MediaStreamAudioSourceNode  we'll be recording
+var encodingType; 		//holds selected encoding for resulting audio (file)
+var encodeAfterRecord = true;   // when to encode
 
 // shim for AudioContext when it's not avb. 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -36,7 +38,6 @@ else {
 }
 
 
-checkLanguage();
 
 document.getElementById("JSwarning").style.display = 'none';  // Hide javascript warning
 document.getElementById("overdubURLdisplay").style.display = 'none';  // Hide User URL display
