@@ -3,66 +3,45 @@
 //webkitURL is deprecated but nevertheless
 URL = window.URL || window.webkitURL;
 
-checkLanguage();
-HideUIElementsInit();
-
-var gumStream; 			//stream from getUserMedia()
-var recorder; 			//WebAudioRecorder object
-var input; 			//MediaStreamAudioSourceNode  we'll be recording
-var encodingType; 		//holds selected encoding for resulting audio (file)
-var encodeAfterRecord = true;   // when to encode
+var gumStream; 						//stream from getUserMedia()
+var recorder; 						//WebAudioRecorder object
+var input; 						//MediaStreamAudioSourceNode  we'll be recording
+var encodingType; 					//holds selected encoding for resulting audio (file)
+var encodeAfterRecord = true;       // when to encode
 
 // shim for AudioContext when it's not avb. 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext; //new audio context to help us record
 
-// Configure UI elements
 var encodingTypeSelect = document.getElementById("encodingTypeSelect");
 var recordButton = document.getElementById("recordButton");
 var stopButton = document.getElementById("stopButton");
 var playButton = document.getElementById("playButton");
 
-//add events to those 3 buttons
-recordButton.addEventListener("click", startRecording);
-stopButton.addEventListener("click", stopRecording);
-playButton.addEventListener("click", startPlayback);
-
-// get the URL for the backing track...
 var params = new URLSearchParams(location.search);
 var playbackURL = params.get('playback');
-var playback = new Audio(playbackURL);
 
-// ... and help the user configure ovrdub if there isn't a backing track URL
-
-if (playbackURL === null) {          // If no backing track found in the URL...
-    console.log("Backing track URL not found.");
-    document.getElementById(
-            "mainInterface").style.display = 'none';  // Hide controls
-    askForPlaybackURL();    // Run the code to help the user ask for a URL
-} else {
+if(params.get('playback')===null){
+    console.log("Backing track URL not found: ", playbackURL);
+    document.getElementById("mainInterface").style.display = 'none';  // Hide controls
+    askForPlaybackURL();
+}
+else {
     console.log("Backing track URL found: ", playbackURL);
-    document.getElementById(
-            "inputPlaybackURL").style.display = 'none';  // Hide URL input interface
-    var playbackFileNameSansExtension = playbackURL.replace(
-            /^.*[\\\/]|\.[^/.]+$/g, '');
+    document.getElementById("inputPlaybackURL").style.display = 'none';  // Hide URL input box
+    var playbackFileNameSansExtension = playbackURL.replace(/^.*[\\\/]|\.[^/.]+$/g, '');
     var playback = new Audio(playbackURL);
-    document.getElementById(
-            "displayPlaybackURL").innerHTML = playbackURL.replace(
-            /^.*[\\\/]/, '');
-    document.getElementById("displayPlaybackURL").href = playbackURL;
+    document.getElementById("displayPlaybackURL").innerHTML= playbackURL.replace(/^.*[\\\/]/, '');
+    document.getElementById("displayPlaybackURL").href= playbackURL;
 }
 
 
-function HideUIElementsInit() {
-    document.getElementById(
-            "JSwarning").style.display = 'none';  // Hide javascript warning
-    //
-    //These are commented out because no longer needed :
-//    document.getElementById(
-//            "overdubURLdisplay").style.display = 'none';  // Hide User URL display
-//    document.getElementById(
-//            "encodingTypeSelectDiv").style.display = 'none';  // Hide encoding options
-}
+checkLanguage();
+
+document.getElementById("JSwarning").style.display = 'none';  // Hide javascript warning
+document.getElementById("overdubURLdisplay").style.display = 'none';  // Hide User URL display
+document.getElementById("encodingTypeSelectDiv").style.display = 'none';  // Hide encoding options
+
 
 
 function checkLanguage(){
@@ -93,23 +72,25 @@ function toggle_show_help() {
 
 function askForPlaybackURL(){
     console.log("ask for URL");
-    document.getElementById("inputPlaybackURL").style.display = 'block';  // Reveal URL input box and accompanying instructions
     document.getElementById("overdubURL").style.display = 'block';  // Reveal URL input box and accompanying instructions
 }
 
 function getUserPlaybackURL(){
     console.log("get URL");
-    document.getElementById("overdubURLdisplay").style.display = 'block';  // Reveal URL input interface
+    document.getElementById("overdubURLdisplay").style.display = 'block';  // Reveal URL
     var userPlaybackURL = document.getElementById('userPlaybackURL').value;
     document.getElementById("overdubURL").innerHTML= window.location.href + "?playback=" + userPlaybackURL;
     document.getElementById("overdubURL").href= window.location.href + "?playback=" + userPlaybackURL;
      
-//     window.location.href
+     window.location.href
 //   innerHTML="Format: 2 channel "+encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value+" @ "+audioContext.sampleRate/1000+"kHz";
 }
 
 
-
+//add events to those 3 buttons
+recordButton.addEventListener("click", startRecording);
+stopButton.addEventListener("click", stopRecording);
+playButton.addEventListener("click", startPlayback);
 
 function startPlayback() {
 	console.log("startPlayback() called - ", playbackURL);
