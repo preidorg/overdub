@@ -58,10 +58,12 @@ function checkPlaybackURL(){
 function HideUIElementsInit() {
     document.getElementById(
             "JSwarning").style.display = 'none';  // Hide javascript warning
+    //
+    //These are commented out because no longer needed :
 //    document.getElementById(
 //            "overdubURLdisplay").style.display = 'none';  // Hide User URL display
-    document.getElementById(
-            "encodingTypeSelectDiv").style.display = 'none';  // Hide encoding options
+//    document.getElementById(
+//            "encodingTypeSelectDiv").style.display = 'none';  // Hide encoding options
 }
 
 
