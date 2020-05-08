@@ -58,8 +58,8 @@ function checkPlaybackURL(){
 function HideUIElementsInit() {
     document.getElementById(
             "JSwarning").style.display = 'none';  // Hide javascript warning
-    document.getElementById(
-            "overdubURLdisplay").style.display = 'none';  // Hide User URL display
+//    document.getElementById(
+//            "overdubURLdisplay").style.display = 'none';  // Hide User URL display
     document.getElementById(
             "encodingTypeSelectDiv").style.display = 'none';  // Hide encoding options
 }
@@ -93,17 +93,18 @@ function toggle_show_help() {
 
 function askForPlaybackURL(){
     console.log("ask for URL");
+    document.getElementById("inputPlaybackURL").style.display = 'block';  // Reveal URL input box and accompanying instructions
     document.getElementById("overdubURL").style.display = 'block';  // Reveal URL input box and accompanying instructions
 }
 
 function getUserPlaybackURL(){
     console.log("get URL");
-    document.getElementById("overdubURLdisplay").style.display = 'block';  // Reveal URL
+    document.getElementById("overdubURLdisplay").style.display = 'block';  // Reveal URL input interface
     var userPlaybackURL = document.getElementById('userPlaybackURL').value;
     document.getElementById("overdubURL").innerHTML= window.location.href + "?playback=" + userPlaybackURL;
     document.getElementById("overdubURL").href= window.location.href + "?playback=" + userPlaybackURL;
      
-     window.location.href
+//     window.location.href
 //   innerHTML="Format: 2 channel "+encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value+" @ "+audioContext.sampleRate/1000+"kHz";
 }
 
