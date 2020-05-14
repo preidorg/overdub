@@ -29,7 +29,8 @@ playButton.addEventListener("click", startPlayback);
 
 // get the URL for the backing track...
 var params = new URLSearchParams(location.search);
-var playbackURL = params.get('playback');
+//var playbackURL = params.get('playback');
+var playbackURL = checkURL(params.get('playback'));
 var playback = new Audio(playbackURL);
 
 // ... and help the user configure ovrdub if there isn't a backing track URL
@@ -100,15 +101,41 @@ function askForPlaybackURL(){
 function getUserPlaybackURL(){
     console.log("get URL");
     document.getElementById("overdubURLdisplay").style.display = 'block';  // Reveal URL input interface
-    var userPlaybackURL = document.getElementById('userPlaybackURL').value;
-    document.getElementById("overdubURL").innerHTML= window.location.href + "?playback=" + userPlaybackURL;
-    document.getElementById("overdubURL").href= window.location.href + "?playback=" + userPlaybackURL;
+    var userPlaybackURL = checkURL(document.getElementById('userPlaybackURL').value);
+    var baseURL = window.location.href.split('?')[0];
+    if(userPlaybackURL) {
+    document.getElementById("overdubURL").innerHTML= baseURL + "?playback=" + userPlaybackURL;
+    document.getElementById("overdubURL").href= baseURL + "?playback=" + userPlaybackURL;
+    }
      
 //     window.location.href
 //   innerHTML="Format: 2 channel "+encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value+" @ "+audioContext.sampleRate/1000+"kHz";
 }
 
+//function getUserPlaybackURL(){
+//    console.log("get URL");
+//    document.getElementById("overdubURLdisplay").style.display = 'block';  // Reveal URL input interface
+//    var userPlaybackURL = document.getElementById('userPlaybackURL').value;
+//    document.getElementById("overdubURL").innerHTML= window.location.href + "?playback=" + userPlaybackURL;
+//    document.getElementById("overdubURL").href= window.location.href + "?playback=" + userPlaybackURL;
+//     
+// //     window.location.href
+// //   innerHTML="Format: 2 channel "+encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value+" @ "+audioContext.sampleRate/1000+"kHz";
+//}
 
+function checkURL(playbackURL) {
+    var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+    var regexp = new RegExp(expression);
+
+    if (playbackURL) {
+    matchURL = playbackURL.match(regexp);
+    if (matchURL) {
+        return matchURL[0];
+    }
+    }
+    
+    return null;
+}
 
 
 function startPlayback() {
