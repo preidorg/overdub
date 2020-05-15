@@ -57,13 +57,6 @@ if (playbackURL === null) {          // If no backing track found in the URL...
 function HideUIElementsInit() {
     document.getElementById(
             "JSwarning").style.display = 'none';  // Hide javascript warning
-    //
-    //These are commented out because no longer needed :
-//    document.getElementById(
-//            "overdubURLdisplay").style.display = 'none';  // Hide User URL display
-//    document.getElementById(
-//            "encodingTypeSelectDiv").style.display = 'none';  // Hide encoding options
-}
 
 
 function checkLanguage(){
@@ -84,12 +77,8 @@ function toggle_show_help() {
             break
         case "none":
             document.getElementById("od_help").style.display = 'block';
-            // 
-            break
-                
-                
+            break         
     }
- //   document.getElementById("od_help").style.display = 'block';  // 
 }
 
 function askForPlaybackURL(){
@@ -140,12 +129,13 @@ function checkURL(playbackURL) {
 
 function startPlayback() {
 	console.log("startPlayback() called - ", playbackURL);
-        // temporarily change the function of the stop button from stopRecording to stop Playback.  We'll remember to change it back!
+        // temporarily change the function of the stop button from stopRecording to stop Playback (redundant if playig twice in a row of course).  We'll change it back when we're finished.
         stopButton.removeEventListener("click", stopRecording);
         stopButton.addEventListener("click", stopPlayback);
 
         playback.play();   
         
+        // Put the button states back to what they should be
 	recordButton.disabled = true;
 	playButton.disabled = true;
         stopButton.disabled = false;
@@ -156,7 +146,7 @@ function stopPlayback() {
         
         playback.pause(); 
         playback.currentTime = 0;  
-        // This is where we change the function of the stop button back to stopRecording from stopPlayback!
+        // This is where we change the function of the stop button back to stopRecording from stopPlayback (redundant if recording twice in a row of course).
         stopButton.removeEventListener("click", stopPlayback);
         stopButton.addEventListener("click", stopRecording);
 
@@ -267,7 +257,7 @@ function stopRecording() {
 	//stop microphone access
 	gumStream.getAudioTracks()[0].stop();
 
-	//disable the stop button
+	//disable the stop button and enable the other buttons
 	stopButton.disabled = true;
 	recordButton.disabled = false;
 	playButton.disabled = false;
