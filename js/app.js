@@ -4,7 +4,7 @@
 URL = window.URL || window.webkitURL;
 
 checkLanguage();
-HideUIElementsInit();
+document.getElementById("JSwarning").style.display = 'none';
 
 var gumStream; 			//stream from getUserMedia()
 var recorder; 			//WebAudioRecorder object
@@ -52,11 +52,6 @@ if (playbackURL === null) {          // If no backing track found in the URL...
             /^.*[\\\/]/, '');
     document.getElementById("displayPlaybackURL").href = playbackURL;
 }
-
-
-function HideUIElementsInit() {
-    document.getElementById(
-            "JSwarning").style.display = 'none';  // Hide javascript warning
 
 
 function checkLanguage(){
