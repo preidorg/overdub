@@ -84,12 +84,19 @@ function askForPlaybackURL(){
 
 function getUserPlaybackURL(){
     console.log("get URL");
-    document.getElementById("overdubURLdisplay").style.display = 'block';  // Reveal URL input interface
+    // Reveal the code to display the generated URL and explain what to do with it.
+    document.getElementById("overdubURLdisplay").style.display = 'block'; 
+    // Grab and check the user enterred URL
     var userPlaybackURL = checkURL(document.getElementById('userPlaybackURL').value);
     var baseURL = window.location.href.split('?')[0];
     if(userPlaybackURL) {
     document.getElementById("overdubURL").innerHTML= baseURL + "?playback=" + userPlaybackURL;
     document.getElementById("overdubURL").href= baseURL + "?playback=" + userPlaybackURL;
+    }
+    else {
+    document.getElementById("overdubURL").innerHTML= "Invalid URL / URL non valide";
+    document.getElementById("overdubURL").href= "";
+        
     }
      
 //     window.location.href
@@ -298,5 +305,5 @@ function __log(e, data) {
 	log.innerHTML += "\n" + e + " " + (data || '');
 }
 function __logClear() {
-    log.innerHTML = ''
+    log.innerHTML = '';
 }
