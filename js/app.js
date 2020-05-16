@@ -4,7 +4,7 @@
 URL = window.URL || window.webkitURL;
 
 checkLanguage();
-HideUIElementsInit();
+document.getElementById("JSwarning").style.display = 'none';
 
 var gumStream; 			//stream from getUserMedia()
 var recorder; 			//WebAudioRecorder object
@@ -29,7 +29,8 @@ playButton.addEventListener("click", startPlayback);
 
 // get the URL for the backing track...
 var params = new URLSearchParams(location.search);
-var playbackURL = params.get('playback');
+//var playbackURL = params.get('playback');
+var playbackURL = checkURL(params.get('playback'));
 var playback = new Audio(playbackURL);
 
 // ... and help the user configure ovrdub if there isn't a backing track URL
@@ -53,18 +54,6 @@ if (playbackURL === null) {          // If no backing track found in the URL...
 }
 
 
-function HideUIElementsInit() {
-    document.getElementById(
-            "JSwarning").style.display = 'none';  // Hide javascript warning
-    //
-    //These are commented out because no longer needed :
-//    document.getElementById(
-//            "overdubURLdisplay").style.display = 'none';  // Hide User URL display
-//    document.getElementById(
-//            "encodingTypeSelectDiv").style.display = 'none';  // Hide encoding options
-}
-
-
 function checkLanguage(){
     var known = { en: true, fr: true};
     var lang  = ((navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage || 'en').substr(0, 2);
@@ -83,12 +72,8 @@ function toggle_show_help() {
             break
         case "none":
             document.getElementById("od_help").style.display = 'block';
-            // 
-            break
-                
-                
+            break         
     }
- //   document.getElementById("od_help").style.display = 'block';  // 
 }
 
 function askForPlaybackURL(){
@@ -99,26 +84,60 @@ function askForPlaybackURL(){
 
 function getUserPlaybackURL(){
     console.log("get URL");
-    document.getElementById("overdubURLdisplay").style.display = 'block';  // Reveal URL input interface
-    var userPlaybackURL = document.getElementById('userPlaybackURL').value;
-    document.getElementById("overdubURL").innerHTML= window.location.href + "?playback=" + userPlaybackURL;
-    document.getElementById("overdubURL").href= window.location.href + "?playback=" + userPlaybackURL;
+    // Reveal the code to display the generated URL and explain what to do with it.
+    document.getElementById("overdubURLdisplay").style.display = 'block'; 
+    // Grab and check the user enterred URL
+    var userPlaybackURL = checkURL(document.getElementById('userPlaybackURL').value);
+    var baseURL = window.location.href.split('?')[0];
+    if(userPlaybackURL) {
+    document.getElementById("overdubURL").innerHTML= baseURL + "?playback=" + userPlaybackURL;
+    document.getElementById("overdubURL").href= baseURL + "?playback=" + userPlaybackURL;
+    }
+    else {
+    document.getElementById("overdubURL").innerHTML= "Invalid URL / URL non valide";
+    document.getElementById("overdubURL").href= "";
+        
+    }
      
 //     window.location.href
 //   innerHTML="Format: 2 channel "+encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value+" @ "+audioContext.sampleRate/1000+"kHz";
 }
 
+//function getUserPlaybackURL(){
+//    console.log("get URL");
+//    document.getElementById("overdubURLdisplay").style.display = 'block';  // Reveal URL input interface
+//    var userPlaybackURL = document.getElementById('userPlaybackURL').value;
+//    document.getElementById("overdubURL").innerHTML= window.location.href + "?playback=" + userPlaybackURL;
+//    document.getElementById("overdubURL").href= window.location.href + "?playback=" + userPlaybackURL;
+//     
+// //     window.location.href
+// //   innerHTML="Format: 2 channel "+encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value+" @ "+audioContext.sampleRate/1000+"kHz";
+//}
 
+function checkURL(playbackURL) {
+    var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+    var regexp = new RegExp(expression);
+
+    if (playbackURL) {
+    matchURL = playbackURL.match(regexp);
+    if (matchURL) {
+        return matchURL[0];
+    }
+    }
+    
+    return null;
+}
 
 
 function startPlayback() {
 	console.log("startPlayback() called - ", playbackURL);
-        // temporarily change the function of the stop button from stopRecording to stop Playback.  We'll remember to change it back!
+        // temporarily change the function of the stop button from stopRecording to stop Playback (redundant if playig twice in a row of course).  We'll change it back when we're finished.
         stopButton.removeEventListener("click", stopRecording);
         stopButton.addEventListener("click", stopPlayback);
 
         playback.play();   
         
+        // Put the button states back to what they should be
 	recordButton.disabled = true;
 	playButton.disabled = true;
         stopButton.disabled = false;
@@ -129,7 +148,7 @@ function stopPlayback() {
         
         playback.pause(); 
         playback.currentTime = 0;  
-        // This is where we change the function of the stop button back to stopRecording from stopPlayback!
+        // This is where we change the function of the stop button back to stopRecording from stopPlayback (redundant if recording twice in a row of course).
         stopButton.removeEventListener("click", stopPlayback);
         stopButton.addEventListener("click", stopRecording);
 
@@ -240,7 +259,7 @@ function stopRecording() {
 	//stop microphone access
 	gumStream.getAudioTracks()[0].stop();
 
-	//disable the stop button
+	//disable the stop button and enable the other buttons
 	stopButton.disabled = true;
 	recordButton.disabled = false;
 	playButton.disabled = false;
@@ -286,5 +305,5 @@ function __log(e, data) {
 	log.innerHTML += "\n" + e + " " + (data || '');
 }
 function __logClear() {
-    log.innerHTML = ''
+    log.innerHTML = '';
 }
