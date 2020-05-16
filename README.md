@@ -6,7 +6,7 @@ Tool for conductors and choir masters to have members of their ensembles record 
 
 The choir/orchestra director adds the URL of the sound file they wish to use to the URL of the overdub web page in the following manner:  https://preidorg.github.io/overdub/?playback=https://example.com/sound.mp3 where https://example.com/sound.mp3 is the URL of the sound file.  They then share this link with their musicians who then follow the link, practice with the backing track, record themselves, download the recording, then send the recording to the director.  
 
-Try here: Démo ici: [https://preidorg.github.io/overdub/?playback=https://preidorg.github.io/overdub/son/sound1.mp3](https://preidorg.github.io/overdub/?playback=https://preidorg.github.io/overdub/son/sound1.mp3)
+Try here: Démo ici: [https://preidorg.github.io/overdub/?playback=https://preidorg.github.io/overdub/son/arbeau-tenor.mp3](https://preidorg.github.io/overdub/?playback=https://preidorg.github.io/overdub/son/arbeau-tenor.mp3)
 
 
 To do :
@@ -22,7 +22,7 @@ Dans le contexte du confinement qui nous touche actuellement à cause du COVID-1
 ## Utilisation :
 La/le chef d'orchestre/chef de choeur modifie l'URL de la page overdub en y ajoutant l'URL du son à utiliser comme playback de la manière suivante : https://preidorg.github.io/overdub/?playback=https://example.com/sound.mp3 où https://example.com/sound.mp3 correspond à l'URL du playback. On partage ensuite cette URL avec les musiciens qui s'y rendent, s'entrainent avec le playback, s'enregistrent avec le playback, téléchargent le son résultant et l'envoient à la/au chef.
 
-Démo ici: [https://preidorg.github.io/overdub/?playback=https://preidorg.github.io/overdub/son/sound1.mp3](https://preidorg.github.io/overdub/?playback=https://preidorg.github.io/overdub/son/sound1.mp3)
+Démo ici: [https://preidorg.github.io/overdub/?playback=https://preidorg.github.io/overdub/son/arbeau-tenor.mp3](https://preidorg.github.io/overdub/?playback=https://preidorg.github.io/overdub/son/arbeau-tenor.mp3)
 
 Ce qu'il reste à faire :
 J'ai modifié cette liste puisque j'ai trouvé une autre façon d'intégrer les sons mp3 qui ne nécessite pas que les fichiers soient stockés sur le même serveur. 
