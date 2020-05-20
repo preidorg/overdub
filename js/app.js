@@ -90,8 +90,8 @@ function getUserPlaybackURL(){
     var userPlaybackURL = checkURL(document.getElementById('userPlaybackURL').value);
     var baseURL = window.location.href.split('?')[0];
     if(userPlaybackURL) {
-    document.getElementById("overdubURL").innerHTML= baseURL + "?playback=" + userPlaybackURL;
-    document.getElementById("overdubURL").href= baseURL + "?playback=" + userPlaybackURL;
+    document.getElementById("overdubURL").innerHTML= baseURL + "?pb=" + userPlaybackURL;
+    document.getElementById("overdubURL").href= baseURL + "?pb=" + userPlaybackURL;
     }
     else {
     document.getElementById("overdubURL").innerHTML= "Invalid URL / URL non valide";
