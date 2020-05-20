@@ -97,6 +97,10 @@ function getUserPlaybackURL(){
         }
         document.getElementById("overdubURL").innerHTML= ovrdubURL;
         document.getElementById("overdubURL").href= ovrdubURL;
+        document.getElementById("userPlaybackTitle").innerHTML= (userPbTitle||ovrdubURL.replace(
+            /^.*[\\\/]/, ''));
+        document.getElementById("userPlaybackTitle").href= userPlaybackURL;
+        
     }
     else {
         document.getElementById("overdubURL").innerHTML= "Invalid URL / URL non valide";
