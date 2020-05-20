@@ -302,7 +302,7 @@ function createDownloadLink(blob,encoding) {
         if (usersClass !==''){
             usersClass += '_';
         }
-	link.download = playbackFileNameSansExtension + '_' + usersClass + usersName + new Date().toISOString() + '.'+encoding;
+	link.download = (pbTitle||playbackFileNameSansExtension) + '_' + usersClass + usersName + new Date().toISOString() + '.'+encoding;
 	link.innerHTML = link.download;
 
 	//add the new audio and a elements to the li element
