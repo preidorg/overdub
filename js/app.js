@@ -29,10 +29,10 @@ playButton.addEventListener("click", startPlayback);
 
 // get the URL for the backing track...
 var params = new URLSearchParams(location.search);
-//var playbackURL = params.get('playback');
-var playbackURL = checkURL(params.get('playback'));
+var playbackURL = checkURL(params.get('playback')||params.get('pb'));
 var playback = new Audio(playbackURL);
-
+var pbtitle = checkpbTitle(params.get('pbtitle'));
+console.log("pbtitle: ", pbtitle);
 // ... and help the user configure ovrdub if there isn't a backing track URL
 
 if (playbackURL === null) {          // If no backing track found in the URL...
@@ -41,7 +41,7 @@ if (playbackURL === null) {          // If no backing track found in the URL...
             "mainInterface").style.display = 'none';  // Hide controls
     askForPlaybackURL();    // Run the code to help the user ask for a URL
 } else {
-    console.log("Backing track URL found: ", playbackURL);
+    console.log("Valid backing track URL found: ", playbackURL);
     document.getElementById(
             "inputPlaybackURL").style.display = 'none';  // Hide URL input interface
     var playbackFileNameSansExtension = playbackURL.replace(
@@ -119,15 +119,27 @@ function checkURL(playbackURL) {
     var regexp = new RegExp(expression);
 
     if (playbackURL) {
-    matchURL = playbackURL.match(regexp);
-    if (matchURL) {
-        return matchURL[0];
+        matchURL = playbackURL.match(regexp);
+        if (matchURL) {
+            return matchURL[0];
+        }
     }
-    }
-    
     return null;
 }
 
+function checkpbTitle(pbTitle) {
+    var expression = /[-a-zA-Z0-9_\+.]+/;
+    var regexp = new RegExp(expression);
+
+    if (pbTitle) {
+        matchText = pbTitle.match(regexp);
+        if (matchText) {
+            console.log("pbtitle found:", matchText[0]);
+            return matchText[0];
+        }
+    }
+    return null;
+}
 
 function startPlayback() {
 	console.log("startPlayback() called - ", playbackURL);
