@@ -83,19 +83,24 @@ function askForPlaybackURL(){
 }
 
 function getUserPlaybackURL(){
-    console.log("get URL");
+    console.log("get user backing track URL");
     // Reveal the code to display the generated URL and explain what to do with it.
     document.getElementById("overdubURLdisplay").style.display = 'block'; 
     // Grab and check the user enterred URL
     var userPlaybackURL = checkURL(document.getElementById('userPlaybackURL').value);
+    var userPbTitle = checkpbTitle(document.getElementById('userPbTitle').value);
     var baseURL = window.location.href.split('?')[0];
     if(userPlaybackURL) {
-    document.getElementById("overdubURL").innerHTML= baseURL + "?pb=" + userPlaybackURL;
-    document.getElementById("overdubURL").href= baseURL + "?pb=" + userPlaybackURL;
+        var ovrdubURL= (baseURL + "?pb=" + userPlaybackURL);
+        if (userPbTitle){
+            ovrdubURL= (ovrdubURL + "&pbtitle=" + userPbTitle);
+        }
+        document.getElementById("overdubURL").innerHTML= ovrdubURL;
+        document.getElementById("overdubURL").href= ovrdubURL;
     }
     else {
-    document.getElementById("overdubURL").innerHTML= "Invalid URL / URL non valide";
-    document.getElementById("overdubURL").href= "";
+        document.getElementById("overdubURL").innerHTML= "Invalid URL / URL non valide";
+        document.getElementById("overdubURL").href= "";
         
     }
      
@@ -134,7 +139,7 @@ function checkpbTitle(pbTitle) {
     if (pbTitle) {
         matchText = pbTitle.match(regexp);
         if (matchText) {
-            console.log("pbtitle found:", matchText[0]);
+//            console.log("pbtitle found:", matchText[0]);
             return matchText[0];
         }
     }
