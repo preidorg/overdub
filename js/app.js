@@ -31,8 +31,8 @@ playButton.addEventListener("click", startPlayback);
 var params = new URLSearchParams(location.search);
 var playbackURL = checkURL(params.get('playback')||params.get('pb'));
 var playback = new Audio(playbackURL);
-var pbtitle = checkpbTitle(params.get('pbtitle'));
-console.log("pbtitle: ", pbtitle);
+var pbTitle = checkpbTitle(params.get('pbtitle'));
+console.log("pbtitle: ", pbTitle);
 // ... and help the user configure ovrdub if there isn't a backing track URL
 
 if (playbackURL === null) {          // If no backing track found in the URL...
@@ -48,8 +48,8 @@ if (playbackURL === null) {          // If no backing track found in the URL...
             /^.*[\\\/]|\.[^/.]+$/g, '');
     var playback = new Audio(playbackURL);
     document.getElementById(
-            "displayPlaybackURL").innerHTML = playbackURL.replace(
-            /^.*[\\\/]/, '');
+            "displayPlaybackURL").innerHTML = (pbTitle||playbackURL.replace(
+            /^.*[\\\/]/, ''));
     document.getElementById("displayPlaybackURL").href = playbackURL;
 }
 
