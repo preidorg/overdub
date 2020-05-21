@@ -31,7 +31,7 @@ playButton.addEventListener("click", startPlayback);
 var params = new URLSearchParams(location.search);
 var playbackURL = checkURL(params.get('playback')||params.get('pb'));
 var playback = new Audio(playbackURL);
-var pbTitle = checkpbTitle(params.get('pbtitle'));
+var pbTitle = replaceNonWhiteListedChars(params.get('pbtitle'));
 console.log("pbtitle: ", pbTitle);
 // ... and help the user configure ovrdub if there isn't a backing track URL
 
@@ -88,7 +88,7 @@ function getUserPlaybackURL(){
     document.getElementById("overdubURLdisplay").style.display = 'block'; 
     // Grab and check the user enterred URL
     var userPlaybackURL = checkURL(document.getElementById('userPlaybackURL').value);
-    var userPbTitle = checkpbTitle(document.getElementById('userPbTitle').value);
+    var userPbTitle = replaceNonWhiteListedChars(document.getElementById('userPbTitle').value);
     var baseURL = window.location.href.split('?')[0];
     if(userPlaybackURL) {
         var ovrdubURL= (baseURL + "?pb=" + userPlaybackURL);
@@ -112,16 +112,6 @@ function getUserPlaybackURL(){
 //   innerHTML="Format: 2 channel "+encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value+" @ "+audioContext.sampleRate/1000+"kHz";
 }
 
-//function getUserPlaybackURL(){
-//    console.log("get URL");
-//    document.getElementById("overdubURLdisplay").style.display = 'block';  // Reveal URL input interface
-//    var userPlaybackURL = document.getElementById('userPlaybackURL').value;
-//    document.getElementById("overdubURL").innerHTML= window.location.href + "?playback=" + userPlaybackURL;
-//    document.getElementById("overdubURL").href= window.location.href + "?playback=" + userPlaybackURL;
-//     
-// //     window.location.href
-// //   innerHTML="Format: 2 channel "+encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value+" @ "+audioContext.sampleRate/1000+"kHz";
-//}
 
 function checkURL(playbackURL) {
     var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
@@ -136,9 +126,12 @@ function checkURL(playbackURL) {
     return null;
 }
 
-function checkpbTitle(pbTitle) {
-    if (pbTitle) {
-        return pbTitle.replace(/[^-a-zA-Z0-9_\+.]/g, '-');
+function replaceNonWhiteListedChars(TextToFix) {
+    var expression = /[^-a-zA-Z0-9_\+.]/g;
+    var NonWhiteListedChars = new RegExp(expression);
+    
+    if (TextToFix) {
+        return TextToFix.replace(NonWhiteListedChars, '-');
     }
     return null;
 }
@@ -296,13 +289,19 @@ function createDownloadLink(blob,encoding) {
 
 	//link the a element to the blob
 	link.href = url;
-        var usersName = document.getElementById('usersName').value;
-                if (usersName !==''){
+        var usersName = replaceNonWhiteListedChars(document.getElementById('usersName').value);
+                if (usersName){
             usersName += '_';
         }
-        let usersClass = document.getElementById('usersClass').value;
-        if (usersClass !==''){
+        else {
+            usersName='';
+        }
+        let usersClass = replaceNonWhiteListedChars(document.getElementById('usersClass').value);
+        if (usersClass !== null){
             usersClass += '_';
+        }
+                else {
+            usersClass='';
         }
 	link.download = (pbTitle||playbackFileNameSansExtension) + '_' + usersClass + usersName + new Date().toISOString() + '.'+encoding;
 	link.innerHTML = link.download;
