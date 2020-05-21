@@ -127,7 +127,7 @@ function checkURL(playbackURL) {
 }
 
 function replaceNonWhiteListedChars(TextToFix) {
-    var expression = /[^-a-zA-Z0-9_\+.]/g;
+    var expression = /[^-a-zA-Z0-9éèàïî_\+.]/g;
     var NonWhiteListedChars = new RegExp(expression);
     
     if (TextToFix) {
