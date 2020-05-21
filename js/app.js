@@ -29,10 +29,10 @@ playButton.addEventListener("click", startPlayback);
 
 // get the URL for the backing track...
 var params = new URLSearchParams(location.search);
-//var playbackURL = params.get('playback');
-var playbackURL = checkURL(params.get('playback'));
+var playbackURL = checkURL(params.get('playback')||params.get('pb'));
 var playback = new Audio(playbackURL);
-
+var pbTitle = replaceNonWhiteListedChars(params.get('pbtitle'));
+console.log("pbtitle: ", pbTitle);
 // ... and help the user configure ovrdub if there isn't a backing track URL
 
 if (playbackURL === null) {          // If no backing track found in the URL...
@@ -41,15 +41,15 @@ if (playbackURL === null) {          // If no backing track found in the URL...
             "mainInterface").style.display = 'none';  // Hide controls
     askForPlaybackURL();    // Run the code to help the user ask for a URL
 } else {
-    console.log("Backing track URL found: ", playbackURL);
+    console.log("Valid backing track URL found: ", playbackURL);
     document.getElementById(
             "inputPlaybackURL").style.display = 'none';  // Hide URL input interface
     var playbackFileNameSansExtension = playbackURL.replace(
             /^.*[\\\/]|\.[^/.]+$/g, '');
     var playback = new Audio(playbackURL);
     document.getElementById(
-            "displayPlaybackURL").innerHTML = playbackURL.replace(
-            /^.*[\\\/]/, '');
+            "displayPlaybackURL").innerHTML = (pbTitle||playbackURL.replace(
+            /^.*[\\\/]/, ''));
     document.getElementById("displayPlaybackURL").href = playbackURL;
 }
 
@@ -83,19 +83,28 @@ function askForPlaybackURL(){
 }
 
 function getUserPlaybackURL(){
-    console.log("get URL");
+    console.log("get user backing track URL");
     // Reveal the code to display the generated URL and explain what to do with it.
     document.getElementById("overdubURLdisplay").style.display = 'block'; 
     // Grab and check the user enterred URL
     var userPlaybackURL = checkURL(document.getElementById('userPlaybackURL').value);
+    var userPbTitle = replaceNonWhiteListedChars(document.getElementById('userPbTitle').value);
     var baseURL = window.location.href.split('?')[0];
     if(userPlaybackURL) {
-    document.getElementById("overdubURL").innerHTML= baseURL + "?playback=" + userPlaybackURL;
-    document.getElementById("overdubURL").href= baseURL + "?playback=" + userPlaybackURL;
+        var ovrdubURL= (baseURL + "?pb=" + userPlaybackURL);
+        if (userPbTitle){
+            ovrdubURL= (ovrdubURL + "&pbtitle=" + userPbTitle);
+        }
+        document.getElementById("overdubURL").innerHTML= ovrdubURL;
+        document.getElementById("overdubURL").href= ovrdubURL;
+        document.getElementById("userPlaybackTitle").innerHTML= (userPbTitle||ovrdubURL.replace(
+            /^.*[\\\/]/, ''));
+        document.getElementById("userPlaybackTitle").href= userPlaybackURL;
+        
     }
     else {
-    document.getElementById("overdubURL").innerHTML= "Invalid URL / URL non valide";
-    document.getElementById("overdubURL").href= "";
+        document.getElementById("overdubURL").innerHTML= "Invalid URL / URL non valide";
+        document.getElementById("overdubURL").href= "";
         
     }
      
@@ -103,31 +112,29 @@ function getUserPlaybackURL(){
 //   innerHTML="Format: 2 channel "+encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value+" @ "+audioContext.sampleRate/1000+"kHz";
 }
 
-//function getUserPlaybackURL(){
-//    console.log("get URL");
-//    document.getElementById("overdubURLdisplay").style.display = 'block';  // Reveal URL input interface
-//    var userPlaybackURL = document.getElementById('userPlaybackURL').value;
-//    document.getElementById("overdubURL").innerHTML= window.location.href + "?playback=" + userPlaybackURL;
-//    document.getElementById("overdubURL").href= window.location.href + "?playback=" + userPlaybackURL;
-//     
-// //     window.location.href
-// //   innerHTML="Format: 2 channel "+encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value+" @ "+audioContext.sampleRate/1000+"kHz";
-//}
 
 function checkURL(playbackURL) {
     var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
     var regexp = new RegExp(expression);
 
     if (playbackURL) {
-    matchURL = playbackURL.match(regexp);
-    if (matchURL) {
-        return matchURL[0];
+        matchURL = playbackURL.match(regexp);
+        if (matchURL) {
+            return matchURL[0];
+        }
     }
-    }
-    
     return null;
 }
 
+function replaceNonWhiteListedChars(TextToFix) {
+    var expression = /[^-a-zA-Z0-9éèàïî_\+.]/g;
+    var NonWhiteListedChars = new RegExp(expression);
+    
+    if (TextToFix) {
+        return TextToFix.replace(NonWhiteListedChars, '-');
+    }
+    return null;
+}
 
 function startPlayback() {
 	console.log("startPlayback() called - ", playbackURL);
@@ -282,12 +289,21 @@ function createDownloadLink(blob,encoding) {
 
 	//link the a element to the blob
 	link.href = url;
-        var usersName = document.getElementById('usersName').value;
-        let usersClass = document.getElementById('usersClass').value;
-        if (usersClass !=''){
+        var usersName = replaceNonWhiteListedChars(document.getElementById('usersName').value);
+                if (usersName){
+            usersName += '_';
+        }
+        else {
+            usersName='';
+        }
+        let usersClass = replaceNonWhiteListedChars(document.getElementById('usersClass').value);
+        if (usersClass !== null){
             usersClass += '_';
         }
-	link.download = playbackFileNameSansExtension + '_' + usersClass + usersName + '_' + new Date().toISOString() + '.'+encoding;
+                else {
+            usersClass='';
+        }
+	link.download = (pbTitle||playbackFileNameSansExtension) + '_' + usersClass + usersName + new Date().toISOString() + '.'+encoding;
 	link.innerHTML = link.download;
 
 	//add the new audio and a elements to the li element
