@@ -137,15 +137,8 @@ function checkURL(playbackURL) {
 }
 
 function checkpbTitle(pbTitle) {
-    var expression = /[-a-zA-Z0-9_\+.]+/;
-    var regexp = new RegExp(expression);
-
     if (pbTitle) {
-        matchText = pbTitle.match(regexp);
-        if (matchText) {
-//            console.log("pbtitle found:", matchText[0]);
-            return matchText[0];
-        }
+        return pbTitle.replace(/[^-a-zA-Z0-9_\+.]/g, '-');
     }
     return null;
 }
