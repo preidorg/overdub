@@ -16,8 +16,11 @@
 </head>
 <body>
     <h1>Ovrdub</h1>
-    <p lang="en">Welcome to Ovrdub, a simple tool to help you record over a backing/guide track.</p>
-    <p lang="fr">Bienvenue sur Ovrdub, un outil simple pour s'enregistrer avec une piste d'accompagnement ou "playback".</p>
+    
+    <p lang="en">Welcome to <a href='./' target='blank'>Ovrdub</a>, a simple tool to help you record over a backing/guide track. <br>
+        <strong>Please use headphones, and remember to save your recordings before leaving this page. </strong></p>
+    <p lang="fr">Bienvenue sur <a href='./' target='blank'>Ovrdub</a>, un outil simple pour s'enregistrer avec une piste d'accompagnement ou "playback". <br>
+        <strong>Merci d'utiliser un casque, et pensez à sauvegarder vos enregistrements avant de quitter la page !</strong></p>
 <!--	<h1>Audio Recording Demo With WebAudioRecorder.js</h1>
 	<p><small>Made by the <a href="https://addpipe.com" target="_blank">Pipe Video Recording Platform</a></small></p>
 	<p>This demo shows you how to use <a href="https://github.com/higuma/web-audio-recorder-js" target="_blank">WebAudioRecorder.js</a> - a JavaScript library written in 2015 by higuma - to record audio and encode to common formats (pcm, Vorbis, mp3) directly in the browser.</p>
@@ -33,37 +36,38 @@
                 <div lang="en">
                     <p>No backing track URL found.  
                         Please enter the URL of a direct link to a sound file below and Ovrdub will generate a link. </p>
-                    <p>You can also try the <a href="./?pb=https://preidorg.github.io/overdub/son/arbeau-tenor.mp3">demo page</a>.</p>
+                    <p>You can also try the <a href="./?pb=https://preidorg.github.io/overdub/son/arbeau-tenor.mp3" target='blank'>demo page</a>.</p>
                 </div>                
                 <div lang="fr">                
-                    <p>Pour configurer Ovrdub, veuillez copier-coller l'URL complete d'un lien direct vers un fichier audio 
+                    <p>Voici l'assistant de configuration d'Ovrdub, pour faire celà, veuillez copier-coller l'URL complete d'un lien direct vers un fichier audio 
                         dans la case URL ci-dessous et Ovrdub générera une URL Ovrdub. 
-                        Ajoutez également un texte dans "Titre" si le nom du fichier trouvé automatiquement ne vous convient pas.
                     </p> 
-                    <p>Vous pouvez également essayer la <a href="./?pb=https://preidorg.github.io/overdub/son/arbeau-tenor.mp3">page de démonstration</a>.</p>
+                    <p>Vous pouvez également essayer la <a href="./?pb=https://preidorg.github.io/overdub/son/arbeau-tenor.mp3" target='blank'>page de démonstration</a>.</p>
                 </div>
                 <label for="userPlaybackURL">URL : </label>
                     <input type="url" id="userPlaybackURL" name="userPlaybackURL" oninput="getUserPlaybackURL()" placeholder="https://example.com/sound.mp3" style="width : 20em">
                     <br>
-                    <label for="userPbTitle" lang="en">Custom title : </label>
-                    <label for="userPbTitle" lang="fr">Titre : </label>
-                    <input type="url" id="userPbTitle" name="userPbTitle" oninput="getUserPlaybackURL()" placeholder="custom_name" style="width : 20em">
             </div>
 
             <div id=overdubURLdisplay style="display:none">
                 <p>
                     <span lang="en">Ovrdub link: </span>
                     <span lang="fr">Lien Ovrdub :</span>
-                    <a id="overdubURL"></a></p>
-                <p lang="en">Use this link to integrate your sound into Ovrdub.  
-                    Copy the link the share with your musicians so that they can record over it.</p>
+                    <a id="overdubURL" target='blank'></a></p>
+                <p lang="en">Please test this link to see if your link is compatible with Ovrdub (only direct links will work).  
+                    then copy the link and share it with your musicians so that they can record over themselves.</p>
                 <p lang="fr">Servez-vous de ce lien pour intégrer votre son dans Ovrdub.  
-                    Copiez le lien et partagez-le avec vos musiciens pourqu'ils s'enregistrent avec.</p>
+                    Copiez le lien et partagez-le avec vos musiciens pour qu'ils puissent s'enregistrer.</p>
                 
                 <p>
-                    <span lang="en">Backing track name (used in download links and customizable above: </span>
-                    <span lang="fr">Voici le titre du playback qui sera ajouté automatiquement dans les liens de téléchargement :</span>
+                    <span lang="en">This is the title of the backing track which will be shown to your users and automatically added to their download links: </span>
+                    <span lang="fr">Voici le titre du playback qui sera ajouté automatiquement dans les liens de téléchargement de vos utilisateurs :</span>
                     <a id="userPlaybackTitle"></a></p>
+                    <label for="userPbTitle" lang="en">Custom title : </label>
+                    <label for="userPbTitle" lang="fr">Titre : </label>
+                    <input type="url" id="userPbTitle" name="userPbTitle" oninput="getUserPlaybackURL()" placeholder="custom_name" style="width : 20em">
+                
+                <p lang="en">If you wish to customise this title, please type a new text in the field above.</p>
                 <p lang="fr">Si ce texte ne vous satisfait pas, vous pouvez en mettre un autre dans le champ au-dessus.</p>
             </div>
             <div id='encodingTypeSelectDiv' style="display:none">

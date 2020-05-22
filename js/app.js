@@ -167,6 +167,10 @@ function stopPlayback() {
 
 function startRecording() {
 	console.log("startRecording() called");
+        window.onbeforeunload = function() {
+            return "Are you sure you wish to leave this page? Any unsaved recordings will be lost."; 
+        };
+
 
 	/*
 		Simple constraints object, for more advanced features see
