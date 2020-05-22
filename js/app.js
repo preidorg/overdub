@@ -3,6 +3,7 @@
 //webkitURL is deprecated but nevertheless
 URL = window.URL || window.webkitURL;
 
+var lang='en';
 checkLanguage();
 document.getElementById("JSwarning").style.display = 'none';
 
@@ -56,7 +57,7 @@ if (playbackURL === null) {          // If no backing track found in the URL...
 
 function checkLanguage(){
     var known = { en: true, fr: true};
-    var lang  = ((navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage || 'en').substr(0, 2);
+    lang  = ((navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage || 'en').substr(0, 2);
     if(!known[lang])
         lang = 'en';
     console.log("Language: ", lang);
@@ -285,6 +286,9 @@ function createDownloadLink(blob,encoding) {
 	var url = URL.createObjectURL(blob);
 	var au = document.createElement('audio');
 	var li = document.createElement('li');
+        var dltext = document.createElement('span')
+        var dltexten = document.createElement('span')
+        var dltextfr = document.createElement('span')
 	var link = document.createElement('a');
 
 	//add controls to the <audio> element
@@ -293,6 +297,8 @@ function createDownloadLink(blob,encoding) {
 
 	//link the a element to the blob
 	link.href = url;
+        
+        //get information to add to the filename
         var usersName = replaceNonWhiteListedChars(document.getElementById('usersName').value);
                 if (usersName){
             usersName += '_';
@@ -307,12 +313,21 @@ function createDownloadLink(blob,encoding) {
                 else {
             usersClass='';
         }
+        
 	link.download = (pbTitle||playbackFileNameSansExtension) + '_' + usersClass + usersName + new Date().toISOString() + '.'+encoding;
-	link.innerHTML = link.download;
+	link.innerHTML = (link.download);
+        dltexten.innerHTML = ("Download link: ");
+        dltexten.lang = ('en');
+        dltextfr.innerHTML = ("Lien téléchargement : ");
+        dltextfr.lang = ('fr');
 
+        
 	//add the new audio and a elements to the li element
+        dltext.appendChild(dltexten);
+        dltext.appendChild(dltextfr);
+        dltext.appendChild(link);
 	li.appendChild(au);
-	li.appendChild(link);
+	li.appendChild(dltext);
 
 	//add the li element to the ordered list
 	recordingsList.appendChild(li);
