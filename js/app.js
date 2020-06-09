@@ -286,9 +286,9 @@ function createDownloadLink(blob,encoding) {
 	var url = URL.createObjectURL(blob);
 	var au = document.createElement('audio');
 	var li = document.createElement('li');
-        var dltext = document.createElement('span')
-        var dltexten = document.createElement('span')
-        var dltextfr = document.createElement('span')
+        var dltext = document.createElement('span');
+        var dltexten = document.createElement('span');
+        var dltextfr = document.createElement('span');
 	var link = document.createElement('a');
 
 	//add controls to the <audio> element
@@ -315,19 +315,20 @@ function createDownloadLink(blob,encoding) {
         }
         
 	link.download = (pbTitle||playbackFileNameSansExtension) + '_' + usersClass + usersName + new Date().toISOString() + '.'+encoding;
-	link.innerHTML = (link.download);
-        dltexten.innerHTML = ("Download link: ");
+	dltext.innerHTML = (link.download);
+        link.className = ('dllink');
+        dltexten.innerHTML = ("Download recording");
         dltexten.lang = ('en');
-        dltextfr.innerHTML = ("Lien téléchargement : ");
+        dltextfr.innerHTML = ("Téléchargez votre enregistrement");
         dltextfr.lang = ('fr');
 
         
 	//add the new audio and a elements to the li element
-        dltext.appendChild(dltexten);
-        dltext.appendChild(dltextfr);
+        link.appendChild(dltexten);
+        link.appendChild(dltextfr);
         dltext.appendChild(link);
-	li.appendChild(au);
 	li.appendChild(dltext);
+	li.appendChild(au);
 
 	//add the li element to the ordered list
 	recordingsList.appendChild(li);
