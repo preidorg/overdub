@@ -235,6 +235,7 @@ function startRecording() {
 			__log("Encoding complete");
 			createDownloadLink(blob,recorder.encoding);
 			encodingTypeSelect.disabled = false;
+                        document.body.scrollIntoView(false); //Take the browser view to the bottom of the page
 		};
 
 		recorder.setOptions({
