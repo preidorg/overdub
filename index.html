@@ -25,8 +25,8 @@
     </p>
     
     <p lang="fr">Bienvenue sur <a href='./' target='blank'>Ovrdub</a>, un outil simple pour s'enregistrer avec une piste d'accompagnement ou "playback".
-        <br>Surtout, <strong>pensez à autoriser la page à utiliser votre micro</strong> quand le popup vous le demande.
-        <br>Merci d'<strong>utiliser un casque</strong>, et pensez à <strong>télécharger vos enregistrements</strong> dans votre appareil</strong> avant de fermer la page.</p>
+        <br>Surtout, <strong>autorisez la page à utiliser votre micro</strong> quand le popup vous le demande.
+        <br>Merci d'<strong>utiliser un casque</strong>, et pensez à <strong>télécharger votre enregistrement</strong> pour l'envoyer au professeur.</p>
 <!--	Paying hommage to creators of the projets used to build this one:
         <h1>Audio Recording Demo With WebAudioRecorder.js</h1>
 	<p><small>Made by the <a href="https://addpipe.com" target="_blank">Pipe Video Recording Platform</a></small></p>
@@ -111,12 +111,14 @@
             <!--        Main interface    -->
 
             <div id="mainInterface">
-                <a onclick="toggle_show_help()" lang="en">Help</a>
-                <a onclick="toggle_show_help()" lang="fr">Aide</a>
+                <a onclick="toggle_show_help()" lang="en">Read me</a>
+                <a onclick="toggle_show_help()" lang="fr">Lisez-moi</a>
                 <div id="od_help" style="display : none">
                     <div lang="en">
                         <p><strong>Welcome to Ovrdub a tool to help you record over a backing/guide track.</strong>  
-                            Please wear headphones so that the backing/guide track can't be heard on the recording.
+                            The name Ovrdub is derived from the techinque of <a href="https://en.wikipedia.org/wiki/Overdubbing">overdubbing</a>.
+                            "Overdubbing is a technique used in audio recording where a passage has been pre-recorded, and then during replay, another part is recorded to go along with the original."</p>
+                        <p>    Please wear headphones so that the backing/guide track can't be heard on the recording.
                         You will probably find it more comfortable to listen to the backing track with only one ear, so that you can hear your voice or instrument with the other.</p>
                         <p>When you press play, you will hear the backing track and you can practice singing or playing along with it.
                         When you are ready to record, write your name/class in the input fields so it can be added to the filename, then press record. 
@@ -132,16 +134,21 @@
                     <div lang="fr">
                         <p>
                             <strong>Bienvenue sur Ovrdub, un outil pour s'enregistrer avec une piste d'accompagnement (playback) dans les oreilles.</strong>
-                        Il est nécessaire de porter un casque ou des écouteurs afin que la piste d'accompagnement ne s'entende pas sur l'enregistrement.
-                        Il est généralement plus confortable d'écouter d'une seule oreille pour pouvoir entendre sa propre voix ou son propre instrument avec l'autre.
+                            Le nom ovrdub est dérivé de la technique de "Overdubbing" ou <a href="https://fr.wikipedia.org/wiki/Re-recording">Re-recording</a> en français. 
+                            « Elle consiste à enregistrer des sons rajoutés à d’autres sons déjà enregistrés afin de les mélanger au moment du mixage. »
+                        Ovrdub comporte un lecteur et un enregistreur qui se mettent en route simultanément. Ainsi il n’y a pas besoin de deux appareils, ni de logiciel particulier, simplement un navigateur web pour réaliser son enregistrement.
                         </p>
                         <p>
-                        Vous pouvez appuyez sur play pour entendre le playback et vous entrainer avec.
+                            Il est nécessaire de porter un casque ou des écouteurs afin que la piste d'accompagnement ne s'entende pas sur l'enregistrement.
+                        Vous trouverez problablement plus confortable d'écouter le playback avec une seule oreille pour pouvoir entendre votre propre voix ou instrument de l'autre.
+                        </p>
+                        <p>
+                        Appuyez sur play pour entendre le playback et vous entrainer avec.
                         Quand vous êtes prêt.e à enregistrer, écrivez votre nom (et éventuellement votre classe) dans la case prévue pour qu'il soit ajouté au nom du fichier enregistré. 
                         En suite, cliquez sur "record", puis <strong>autorisez votre navigateur à accéder au micro, sinon Ovrdub ne pourra pas vous enregistrer</strong>.  
                         </p>
                         <p>
-                        Quand vous avez fini d'enregistrer, cliquez sur stop, puis attendez que Ovrdub finisse de convertir votre enregistrement. 
+                        Quand vous avez fini d'enregistrer, cliquez sur stop, puis attendez qu'Ovrdub finisse de convertir votre enregistrement. 
                         Celà peut prendre du temps selon l'appareil que vous utilisez et la longueur de l'enregistrement.
                         Votre enregistrement est maintenant prêt à écouter.
                         Vous pouvez recommencer l'enregistrement autant de fois que vous voulez.  
