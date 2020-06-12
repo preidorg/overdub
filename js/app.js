@@ -294,6 +294,7 @@ function createDownloadLink(blob,encoding) {
 
 	//add controls to the <audio> element
 	au.controls = true;
+	au.controlsList = "nodownload";
 	au.src = url;
 
 	//link the a element to the blob
