@@ -146,7 +146,7 @@ function startPlayback() {
         playback.play();   
         
         // Put the button states back to what they should be
-	recordButton.disabled = true;
+	recordButton.disabled = false;
 	playButton.disabled = true;
         stopButton.disabled = false;
     }
@@ -168,10 +168,13 @@ function stopPlayback() {
 
 function startRecording() {
 	console.log("startRecording() called");
-        window.onbeforeunload = function() {
-            return "Are you sure you wish to leave this page? Any unsaved recordings will be lost."; 
-        };
+        
+        playback.pause(); 
+        playback.currentTime = 0;  
+        stopButton.removeEventListener("click", stopPlayback);
+        stopButton.addEventListener("click", stopRecording);
 
+        window.onbeforeunload = function() { return "Are you sure you wish to leave this page? Any unsaved recordings will be lost."; };
 
 	/*
 		Simple constraints object, for more advanced features see
