@@ -180,6 +180,7 @@ function startRecording() {
     
     var constraints = { audio: true, 
         echoCancellation: false, 
+        noiseSuppression: false,
         video:false };
 
     /*
@@ -242,7 +243,7 @@ function startRecording() {
 		  timeLimit:playback.duration,  // was 120seconds or something like that
 		  encodeAfterRecord:encodeAfterRecord,
 	      ogg: {quality: 0.5},
-	      mp3: {bitRate: 128}
+	      mp3: {bitRate: 160}
 	    });
 
 		//start the recording process
