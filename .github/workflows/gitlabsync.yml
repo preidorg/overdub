@@ -15,5 +15,5 @@ jobs:
     - uses: wangchucheng/git-repo-sync@v0.1.0
       with:
         target-url: https://forge.apps.education.fr/reidp/ovrdub
-        target-username: reidp
+        target-username: @reidp
         target-token: ${{ secrets.GITLABKEY }}
