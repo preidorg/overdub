@@ -91,6 +91,25 @@
                 
                 <p lang="en">If you wish to customise this title, please type a new text in the field above.</p>
                 <p lang="fr">Si ce texte ne vous satisfait pas, vous pouvez en mettre un autre dans le champ au-dessus.</p>
+
+                <!--    Embed code for Moodle/ELEA, ENT, Digipad...        -->
+                <p>
+                    <strong lang="en">Embed code</strong>
+                    <strong lang="fr">Code d'intégration</strong>
+                </p>
+                <p lang="en">To show Ovrdub inside a platform (Moodle, ELEA, ENT, Digipad…), paste this code using the editor's source-code mode (&lt;/&gt;).
+                    If recording doesn't work there, share the Ovrdub link above instead.</p>
+                <p lang="fr">Pour afficher Ovrdub dans une plateforme (Moodle, ELEA, ENT, Digipad…), collez ce code via le mode code source de l'éditeur (&lt;/&gt;).
+                    Si l'enregistrement ne fonctionne pas, partagez plutôt le lien Ovrdub ci-dessus.</p>
+                <textarea id="embedCode" readonly rows="7" style="width: 100%; font-family: monospace; font-size: 85%;" onfocus="this.select()"></textarea>
+                <button type="button" onclick="copyEmbedCode()">
+                    <span lang="en">Copy code</span>
+                    <span lang="fr">Copier le code</span>
+                </button>
+                <span id="embedCodeCopied" style="display:none; color: green;">
+                    <span lang="en">Copied!</span>
+                    <span lang="fr">Copié !</span>
+                </span>
             </div>
             <div id='encodingTypeSelectDiv' style="display:none">
                 <p>Convert recorded audio to:</p>

@@ -101,18 +101,48 @@ function getUserPlaybackURL(){
         document.getElementById("userPlaybackTitle").innerHTML= (userPbTitle||ovrdubURL.replace(
             /^.*[\\\/]/, ''));
         document.getElementById("userPlaybackTitle").href= userPlaybackURL;
-        
+        document.getElementById("embedCode").value= makeEmbedCode(ovrdubURL, userPbTitle);
+
     }
     else {
         document.getElementById("overdubURL").innerHTML= "Invalid URL / URL non valide";
         document.getElementById("overdubURL").href= "";
-        
+        document.getElementById("embedCode").value= "";
+
     }
      
 //     window.location.href
 //   innerHTML="Format: 2 channel "+encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value+" @ "+audioContext.sampleRate/1000+"kHz";
 }
 
+
+// Build iframe code for pasting into Moodle/ELEA, an ENT, Digipad...
+// allow="microphone" is required, otherwise the browser blocks recording inside the frame.
+function makeEmbedCode(ovrdubURL, pbTitle) {
+    var src = ovrdubURL.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    var title = "Ovrdub" + (pbTitle ? " – " + pbTitle : "");
+    var linkText = (lang === "fr") ? "Ouvrir Ovrdub dans un nouvel onglet" : "Open Ovrdub in a new tab";
+    return '<iframe src="' + src + '" title="' + title + '"\n' +
+        '  allow="microphone; autoplay" width="100%" height="700"\n' +
+        '  style="border: 0; max-width: 900px;" loading="lazy"></iframe>\n' +
+        '<p><a href="' + src + '" target="_blank" rel="noopener">' + linkText + '</a></p>';
+}
+
+function copyEmbedCode() {
+    var embedCode = document.getElementById("embedCode");
+    var copied = document.getElementById("embedCodeCopied");
+    embedCode.select();
+    var showCopied = function() {
+        copied.style.display = "inline";
+        setTimeout(function() { copied.style.display = "none"; }, 2000);
+    };
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(embedCode.value).then(showCopied);
+    } else {
+        document.execCommand("copy");
+        showCopied();
+    }
+}
 
 function checkURL(playbackURL) {
     var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
