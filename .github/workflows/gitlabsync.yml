@@ -18,14 +18,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Git Repo Sync
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Push branches and tags to GitLab
         env:
           GITLAB_TOKEN: ${{ secrets.GITLABKEY }}
-          GITLAB_REPO: forge.apps.education.fr/reidp/ovrdub.git
+          GITLAB_REPO: forge.apps.education.fr/pcd_edmus_acnorm/ovrdub.git
           EVENT_NAME: ${{ github.event_name }}
           REF_TYPE: ${{ github.event.ref_type }}
           DELETED_REF: ${{ github.event.ref }}
