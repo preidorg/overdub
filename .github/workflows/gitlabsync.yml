@@ -1,19 +1,52 @@
 name: forgeedu-sync
 
+# Mirrors every branch and tag of this GitHub repo to the GitLab project on
+# forge.apps.education.fr. Needs a repository secret GITLABKEY holding a GitLab
+# access token with the write_repository scope (Developer role or higher).
+
 on:
-  - push
-  - delete
+  push:
+  delete:
+  workflow_dispatch:
+
+concurrency:
+  group: gitlab-sync
+  cancel-in-progress: false
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     name: Git Repo Sync
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - uses: wangchucheng/git-repo-sync@v0.1.0
-      with:
-        target-url: https://forge.apps.education.fr/reidp/ovrdub
-        target-username: reidp
-        target-token: ${{ secrets.GITLABKEY }}
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push branches and tags to GitLab
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLABKEY }}
+          GITLAB_REPO: forge.apps.education.fr/reidp/ovrdub.git
+          EVENT_NAME: ${{ github.event_name }}
+          REF_TYPE: ${{ github.event.ref_type }}
+          DELETED_REF: ${{ github.event.ref }}
+        run: |
+          if [ -z "$GITLAB_TOKEN" ]; then
+            echo "::error::The GITLABKEY secret is missing or empty."
+            exit 1
+          fi
+          git remote add gitlab "https://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO}"
+
+          if [ "$EVENT_NAME" = delete ]; then
+            if [ "$REF_TYPE" = tag ]; then
+              git push gitlab --delete "refs/tags/$DELETED_REF"
+            else
+              git push gitlab --delete "refs/heads/$DELETED_REF"
+            fi
+            exit 0
+          fi
+
+          # actions/checkout only creates a local branch for the commit that
+          # triggered the run, so push every remote-tracking branch instead.
+          branches=$(git for-each-ref --format='+%(refname):refs/heads/%(refname:lstrip=3)' refs/remotes/origin \
+            | grep -v ':refs/heads/HEAD$')
+          git push --force gitlab $branches '+refs/tags/*:refs/tags/*'
