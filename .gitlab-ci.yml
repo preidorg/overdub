@@ -1,0 +1,13 @@
+# Publishes ovrdub on GitLab Pages at
+# https://pcd_edmus_acnorm.forge.apps.education.fr/ovrdub/
+# on every push to the default branch (synced from GitHub).
+pages:
+  image: alpine:3.20
+  script:
+    - mkdir -p public
+    - cp -r index.html favicon.ico ovrdub_logo.svg style.css style_en.css style_fr.css js son public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
