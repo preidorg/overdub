@@ -25,7 +25,7 @@ jobs:
       - name: Push branches and tags to GitLab
         env:
           GITLAB_TOKEN: ${{ secrets.GITLABKEY }}
-          GITLAB_REPO: forge.apps.education.fr/pcd_edmus_acnorm/ovrdub.git
+          GITLAB_REPO: forge.apps.education.fr/ovrdub/ovrdub.forge.apps.education.fr.git
           EVENT_NAME: ${{ github.event_name }}
           REF_TYPE: ${{ github.event.ref_type }}
           DELETED_REF: ${{ github.event.ref }}

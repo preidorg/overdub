@@ -1,5 +1,5 @@
 # Publishes ovrdub on GitLab Pages at
-# https://pcd_edmus_acnorm.forge.apps.education.fr/ovrdub/
+# https://ovrdub.forge.apps.education.fr/
 # on every push to the default branch (synced from GitHub).
 pages:
   image: alpine:3.20
